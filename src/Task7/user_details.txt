@@ -1,0 +1,17 @@
+/* User Id ; User Name; Age; Followers; image/Bio */
+
+1:David Tim:25:New York:500:src/Task7/profilePic/1.jpg:Personal Details haru
+2:Tim Cook:30:Los Angeles:1000:src/Task7/profilePic/2.jpg:User2 details
+3:Michael Johnson:28:Chicago:750:src/Task7/profilePic/3.jpg:User3 details
+4:Emily Davis:22:San Francisco:300:src/Task7/profilePic/4.jpg:User4 details
+5:David Wilson:35:Houston:2000:src/Task7/profilePic/5.jpg:User5 details
+6:Sarah Thompson:27:Miami:900:src/Task7/profilePic/6.jpg:User6 details
+7:Christopher Lee:32:Boston:1500:src/Task7/profilePic/7.jpg:User7 details
+8:Olivia Martin:29:Seattle:400:src/Task7/profilePic/8.jpg:User8 details
+9:Andrew Taylor:26:Denver:600:src/Task7/profilePic/9.jpg:User9 details
+10:Sophia Anderson:31:Austin:1200:src/Task7/profilePic/10.jpg:User10 details
+11:John Thomas:24:San Diego:800:src/Task7/profilePic/11.jpg:User11 details
+12:Jessica Garcia:33:San Jose:1100:src/Task7/profilePic/12.jpg:User12 details
+13:Robert Martinez:23:Washington:1400:src/Task7/profilePic/13.jpg:User13 details
+14:Ashley Robinson:34:Las Vegas:1300:src/Task7/profilePic/14.jpg:User14 details
+15:Pooja Shahi:21:Chabahil:100M:src/Task7/profilePic/15.jpg:You are very very famous in Nepal. You are the best. Why so serious??
