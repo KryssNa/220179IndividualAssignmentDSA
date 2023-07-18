@@ -1,4 +1,6 @@
-package Task7;
+package Task7.View;
+
+import Task7.Model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,7 +91,7 @@ public class AllUserFrame extends JFrame {
 
     private void loadUserDetails() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/Task7/user_details.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/Task7/Database/user_details.txt"));
 
             String line;
             int gridy = 0;
@@ -123,7 +125,7 @@ public class AllUserFrame extends JFrame {
 
     private void loadConnectionDetails() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/Task7/connection_details.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/Task7/Database/connection_details.txt"));
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -295,10 +297,4 @@ public class AllUserFrame extends JFrame {
         dialog.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            AllUserFrame frame = new AllUserFrame();
-            frame.setVisible(true);
-        });
-    }
 }

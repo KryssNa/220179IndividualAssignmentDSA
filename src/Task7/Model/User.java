@@ -1,4 +1,4 @@
-package Task7;
+package Task7.Model;
 
 public class User {
     private int id;

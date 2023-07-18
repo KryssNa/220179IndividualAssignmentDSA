@@ -1,4 +1,4 @@
-package Task7;
+package Task7.Model;
 
 class Connections {
     private int connectedTo;

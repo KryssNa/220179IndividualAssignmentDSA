@@ -1,7 +1,8 @@
-package Task7;
+package Task7.View;
+
+import Task7.Model.User;
 
 import javax.swing.*;
-import javax.swing.text.Style;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
