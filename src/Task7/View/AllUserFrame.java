@@ -172,7 +172,6 @@ public class AllUserFrame extends JFrame {
         }
     }
 
-
     private JPanel createUserCard(User user) {
         JPanel cardPanel = new JPanel(new BorderLayout());
         cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
