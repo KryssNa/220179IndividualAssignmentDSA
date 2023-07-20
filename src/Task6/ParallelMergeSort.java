@@ -168,7 +168,18 @@ public class ParallelMergeSort {
         System.out.println("\nSorted array:");
         printArray(arr);
 
+        // Performance testing with different thread counts and input sizes
+        for (int numThreads = 1; numThreads <= 8; numThreads++) { // Test with 1 to 8 threads
+            long startTime = System.nanoTime(); // Start the timer
+            mergeSort(arr); // Sort the array using parallel merge sort
+            long endTime = System.nanoTime(); // Stop the timer
+            long elapsedTime = endTime - startTime; // Calculate the elapsed time
 
+            // Print the sorted array and the time taken
+            System.out.println("\nSorted array with " + numThreads + " thread(s):");
+            printArray(arr);
+            System.out.println("Time taken: " + (elapsedTime / 1000000) + " ms");
+        }
     }
 }
 
