@@ -441,9 +441,8 @@ public class UserDetailFrame extends JFrame {
     }
 
     private JPanel createConnectionsPanel() {
-        JPanel panel = new JPanel(new BorderLayout());
-
         connectionsPanel = new JPanel(new GridLayout(0, 2, 10, 10));
+        connectionsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         List<Integer> connections = connectionMap.get(user.getId());
         if (connections != null) {
@@ -456,15 +455,17 @@ public class UserDetailFrame extends JFrame {
             }
         }
 
-        // Create a scroll pane with vertical scrolling only
-        JScrollPane scrollPane = new JScrollPane(connectionsPanel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        // Wrap the connections panel in a scroll pane with vertical scrolling only
+        JScrollPane connectionsScrollPane = new JScrollPane(connectionsPanel);
+        connectionsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        connectionsScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        panel.add(scrollPane, BorderLayout.CENTER);
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(connectionsScrollPane, BorderLayout.CENTER);
 
         return panel;
     }
+
 
     private JPanel createConnectionCard(User connectedUser) {
         JPanel cardPanel = new JPanel(new BorderLayout());
