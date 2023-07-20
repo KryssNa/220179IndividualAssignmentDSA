@@ -19,17 +19,22 @@ multithreading. You should also experiment with different thread counts and inpu
 settings for performance. You can use Java's built-in threading and synchronization features, such as the Thread
 class and synchronized keyword, to implement the parallel merge sort algorithm */
 
+
+import java.util.Arrays;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class ParallelMergeSort {
 
+    private static final int THRESHOLD = 1000; // Threshold for using sequential merge sort
+
     public static void mergeSort(int[] arr) {
         // Create a fixed thread pool with the number of available processors
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-        // Perform multithreaded merge sort on the array
+        // Perform parallel merge sort on the array
         mergeSort(arr, 0, arr.length - 1, executor);
 
         // Shut down the executor and wait until all tasks are completed
@@ -43,18 +48,39 @@ public class ParallelMergeSort {
 
     private static void mergeSort(int[] arr, int left, int right, ExecutorService executor) {
         if (left < right) {
+            if (right - left <= THRESHOLD) {
+                // Use sequential merge sort for small subarrays
+                mergeSortSequential(arr, left, right);
+            } else {
+                int mid = (left + right) / 2;
+
+                // Create tasks for the left and right halves and submit them to the executor
+                executor.submit(() -> mergeSort(arr, left, mid, executor)); // Left half
+                executor.submit(() -> mergeSort(arr, mid + 1, right, executor)); // Right half
+
+                // Merge the sorted halves
+                merge(arr, left, mid, right);
+            }
+        }
+    }
+
+    private static void mergeSortSequential(int[] arr, int left, int right) {
+        if (left < right) {
             int mid = (left + right) / 2;
 
-            // Create tasks for the left and right halves and submit them to the executor
-            executor.submit(() -> mergeSort(arr, left, mid, executor)); // Left half
-            executor.submit(() -> mergeSort(arr, mid + 1, right, executor)); // Right half
+            // Sort each half separately using parallel merge sort
+            mergeSortSequential(arr, left, mid);
+            mergeSortSequential(arr, mid + 1, right);
 
             // Merge the sorted halves
             merge(arr, left, mid, right);
         }
     }
 
+    // Merge two sorted subarrays arr[left..mid] and arr[mid+1..right]
     private static void merge(int[] arr, int left, int mid, int right) {
+
+        // Find sizes of the two subarrays to be merged
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
@@ -76,6 +102,7 @@ public class ParallelMergeSort {
         int j = 0; // Index for the right array
         int k = left; // Index for the merged array
 
+        // Merge the two arrays by comparing the smallest elements of each
         while (i < n1 && j < n2) {
             if (leftArr[i] <= rightArr[j]) {
                 arr[k] = leftArr[i];
@@ -102,23 +129,47 @@ public class ParallelMergeSort {
         }
     }
 
-    public static void main(String[] args) {
-        int[] arr = { 5, 2, 8, 1, 9, 4,3 };
 
-        System.out.println("Original Array:");
-        printArray(arr);
-
-        mergeSort(arr);
-
-        System.out.println("Sorted Array:");
-        printArray(arr);
-    }
-
+    // Print the elements of an array
     private static void printArray(int[] arr) {
         for (int num : arr) {
             System.out.print(num + " ");
         }
         System.out.println();
     }
+
+
+    public static void main(String[] args) {
+        // Test the parallel merge sort algorithm
+        System.out.println("performing Parallel Merge Sort Algorithm......");
+
+        // Get input from the user
+        System.out.println("Enter elements of the array separated by space:");
+        Scanner sc = new Scanner(System.in);
+
+        // Convert the input into an array of integers
+        int[] arr;
+        try {
+            String[] input = sc.nextLine().split(" "); // Split the input by space delimiter and store in an array
+            arr = Arrays.stream(input).mapToInt(Integer::parseInt).toArray(); // Convert String[] to int[]
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter integers separated by space.");
+            return; // Exit gracefully in case of an error
+        }
+
+        // Print the original array
+        System.out.println("\nOriginal array:");
+        printArray(arr);
+
+        // Sort the array using parallel merge sort
+        mergeSort(arr);
+
+        // Print the sorted array
+        System.out.println("\nSorted array:");
+        printArray(arr);
+
+
+    }
 }
+
 
