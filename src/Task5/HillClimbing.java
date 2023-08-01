@@ -7,7 +7,7 @@ Implement hill climbing algorithm
 // Necessary imports
 import java.util.Random;
 
-public class Task5A {
+public class HillClimbing {
 
     // utility method to generate a random solution of a given length
     public static char[] generateRandomSolution(int length) {
@@ -63,7 +63,7 @@ public class Task5A {
 
         // while loop to mutate the solution and evaluate it
         while (true) {
-            System.out.println("Best score so far: " + bestScore + " Solution: " + new String(best));
+            System.out.println("Best score so far: " + bestScore + " Program: " + new String(best));
 
             // base case to break out of the loop if the best score is 0
             if (bestScore == 0) {
