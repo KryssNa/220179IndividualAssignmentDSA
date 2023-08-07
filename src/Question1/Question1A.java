@@ -22,4 +22,39 @@ Auxiliary Space: O(1)
 */
 
 public class Question1A {
+
+    // Time Complexity: O(N)
+    // Auxiliary Space: O(1)
+
+    // This method takes a 2D array, price[][3], where price[i][0], price[i][1], and price[i][2] represent the price of
+    // each clothing set for a different colored outfit for person i, and returns the minimum cost required to purchase
+    // clothing such that each person wears have different color clothes if they stand in a row.
+    public static int minimumCost(int[][] price) {
+        int minCost1 = 0;
+        int minCost2 = 0;
+        int minCost3 = 0;
+
+        for (int[] person : price) {
+            int newMinCost1 = person[0] + Math.min(minCost2, minCost3); // person[0] is the price of the black clothing set
+            int newMinCost2 = person[1] + Math.min(minCost1, minCost3); // person[1] is the price of the blue clothing set
+            int newMinCost3 = person[2] + Math.min(minCost1, minCost2); // person[2] is the price of the pink clothing set
+
+            minCost1 = newMinCost1;
+            minCost2 = newMinCost2;
+            minCost3 = newMinCost3;
+        }
+
+        // return the minimum cost required to purchase clothing such that each person wears have different color clothes
+        return Math.min(minCost1, Math.min(minCost2, minCost3));
+    }
+
+    public static void main(String[] args) {
+        int[][] price = {
+                {14, 4, 11},
+                {11, 14, 3},
+                {14, 2, 10}
+        };
+        int minimumCost = minimumCost(price);
+        System.out.println("Minimum cost required: " + minimumCost);
+    }
 }
