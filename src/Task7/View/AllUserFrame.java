@@ -48,9 +48,8 @@ public class AllUserFrame extends JFrame {
         mainPanel.add(userPanel, BorderLayout.CENTER);
 
         // Load user details from file and create user components
-        loadUserDetails();
         loadConnectionDetails();
-
+        loadUserDetails();
         // Add the main panel to the frame
         getContentPane().add(mainPanel);
 
@@ -94,7 +93,6 @@ public class AllUserFrame extends JFrame {
             BufferedReader reader = new BufferedReader(new FileReader("src/Task7/Database/user_details.txt"));
 
             String line;
-            int gridy = 0;
             while ((line = reader.readLine()) != null) {
                 String[] userDetails = line.split(":");
                 if (userDetails.length == 7) {
@@ -102,26 +100,30 @@ public class AllUserFrame extends JFrame {
                     String userName = userDetails[1];
                     String age = userDetails[2];
                     String location = userDetails[3];
-                    String followers = userDetails[4];
                     String imagePath = userDetails[5];
                     String details = userDetails[6];
 
-                    User user = new User(userId, userName, age, location, followers, imagePath, details);
+                    // Calculate the number of followers based on the connectionMap
+                    int numFollowers = 0;
+                    if (connectionMap.containsKey(userId)) {
+                        numFollowers = connectionMap.get(userId).size();
+                    }
+                    String numFollowersString = String.valueOf(numFollowers);
+
+                    User user = new User(userId, userName, age, location, numFollowersString, imagePath, details);
                     userMap.put(userId, user);
 
                     JPanel userCard = createUserCard(user);
                     userPanel.add(userCard);
-
-                    gridy++;
                 }
             }
-
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error loading user details", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
     private void loadConnectionDetails() {
         try {
