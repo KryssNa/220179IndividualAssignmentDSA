@@ -1,6 +1,6 @@
 /* User Id ; User Name; Age; Followers; image/Bio */
 
-1:Kerth Peter:25:sydney:160000:src/Task7/profilePic/20.jpg:Bussinessman
+1:Kerth Peter:25:sydney:160000:src/Task7/profilePic/30.jpg:Bussinessman
 2:Sneha Rana:27:Biratnagar:12700:src/Task7/profilePic/21.jpg:Cheorographer
 3:Hammy Hermes:40:Spain:300:src/Task7/profilePic/22.jpg:Pharmacist
 4:Web Hein:39:France:2900:src/Task7/profilePic/23.jpg:Farmer

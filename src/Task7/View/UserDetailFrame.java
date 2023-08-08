@@ -524,7 +524,7 @@ public class UserDetailFrame extends JFrame {
                     int connectedUserId = connectedUser.getId();
                     connectionMap.get(user.getId()).remove((Integer) connectedUserId);
                     connectionMap.get(connectedUserId).remove((Integer) user.getId());
-
+                    
                     connectionsPanel.remove(cardPanel);
                     connectionsPanel.revalidate();
                     connectionsPanel.repaint();
