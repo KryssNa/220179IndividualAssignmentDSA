@@ -20,28 +20,39 @@ points = 3*1*5+ 3*5*8 + 1*3*8 + 1*8*1 = 167
  */
 public class Question3A {
 
-    //implement your code here
+    // Function to calculate the maximum points from bursting balloons
     public static int maxPoints(int[] a) {
         int n = a.length;
+
+        // Create a new array 'b' with additional elements at the beginning and end
         int[] b = new int[n + 2];
         b[0] = 1;
         b[n + 1] = 1;
         for (int i = 1; i <= n; i++) {
             b[i] = a[i - 1];
         }
+
+        // Create a 2D dynamic programming array 'dp' to store intermediate results
         int[][] dp = new int[n + 2][n + 2];
+
+        // Iterate over ranges of balloon indices in reverse order
         for (int i = n; i >= 1; i--) {
             for (int j = i; j <= n; j++) {
                 for (int k = i; k <= j; k++) {
-                    dp[i][j] = Math.max(dp[i][j], dp[i][k - 1] + b[i - 1] * b[k] * b[j + 1] + dp[k + 1][j]);
+                    // Update dp[i][j] with the maximum points achievable within the range [i, j]
+                    dp[i][j] = Math.max(
+                            dp[i][j],
+                            dp[i][k - 1] + b[i - 1] * b[k] * b[j + 1] + dp[k + 1][j]
+                    );
                 }
             }
         }
-        return dp[1][n];
+
+        return dp[1][n]; // Return the maximum points achievable for the entire range
     }
 
     public static void main(String[] args) {
-        int[] a = {3, 1, 5, 8};
-        System.out.println(maxPoints(a));
+        int[] a = {3, 1, 5, 8}; // Array of balloon values
+        System.out.println(maxPoints(a)); // Print the maximum points achievable
     }
 }

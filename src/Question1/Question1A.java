@@ -39,6 +39,7 @@ public class Question1A {
             int newMinCost2 = person[1] + Math.min(minCost1, minCost3); // person[1] is the price of the blue clothing set
             int newMinCost3 = person[2] + Math.min(minCost1, minCost2); // person[2] is the price of the pink clothing set
 
+            // update the minimum cost required to purchase clothing such that each person wears have different color
             minCost1 = newMinCost1;
             minCost2 = newMinCost2;
             minCost3 = newMinCost3;
@@ -49,6 +50,7 @@ public class Question1A {
     }
 
     public static void main(String[] args) {
+        // test
         int[][] price = {
                 {14, 4, 11},
                 {11, 14, 3},

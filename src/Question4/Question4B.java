@@ -8,56 +8,59 @@ Note that in a binary tree, the root node is at the depth 0, and children of eac
  */
 public class Question4B {
 
-        //implement your code here
-        public static boolean isCousins(TreeNode root, int x, int y) {
-            if (root == null) {
-                return false;
-            }
-
-            int[] xInfo = findNode(root, x, 0, -1);
-            int[] yInfo = findNode(root, y, 0, -1);
-
-            return xInfo[0] == yInfo[0] && xInfo[1] != yInfo[1];
+    // Function to check if two nodes are cousins in a binary tree
+    public static boolean isCousins(TreeNode root, int x, int y) {
+        if (root == null) {
+            return false;
         }
 
-        private static int[] findNode(TreeNode root, int target, int depth, int parent) {
-            if (root == null) {
-                return null;
-            }
+        // Find information about nodes x and y
+        int[] xInfo = findNode(root, x, 0, -1);
+        int[] yInfo = findNode(root, y, 0, -1);
 
-            if (root.val == target) {
-                return new int[]{depth, parent};
-            }
+        // Check if x and y have the same depth but different parents
+        return xInfo[0] == yInfo[0] && xInfo[1] != yInfo[1];
+    }
 
-            int[] left = findNode(root.left, target, depth + 1, root.val);
-            int[] right = findNode(root.right, target, depth + 1, root.val);
-
-            return left == null ? right : left;
+    // Helper function to find information about a node in the tree
+    private static int[] findNode(TreeNode root, int target, int depth, int parent) {
+        if (root == null) {
+            return null;
         }
 
-        public static void main(String[] args) {
-            TreeNode root = new TreeNode(1, new TreeNode(2, null, new TreeNode(4)), new TreeNode(3, null, new TreeNode(5)));
-            int x = 5;
-            int y = 4;
-            System.out.println(isCousins(root, x, y));
+        if (root.val == target) {
+            return new int[]{depth, parent};
         }
 
-        public static class TreeNode {
-            int val;
-            TreeNode left;
-            TreeNode right;
+        int[] left = findNode(root.left, target, depth + 1, root.val);
+        int[] right = findNode(root.right, target, depth + 1, root.val);
 
-            TreeNode() {
-            }
+        return left == null ? right : left;
+    }
 
-            TreeNode(int val) {
-                this.val = val;
-            }
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1, new TreeNode(2, null, new TreeNode(4)), new TreeNode(3, null, new TreeNode(5)));
+        int x = 5;
+        int y = 4;
+        System.out.println(isCousins(root, x, y)); // Print whether x and y are cousins
+    }
 
-            TreeNode(int val, TreeNode left, TreeNode right) {
-                this.val = val;
-                this.left = left;
-                this.right = right;
-            }
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
         }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 }

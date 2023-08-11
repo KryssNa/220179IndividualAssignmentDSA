@@ -15,29 +15,36 @@ In the first step, you can complete task 1 and 2. In the second semester, step t
  */
 public class Question4A {
 
-    //implement your code here
+    // Function to calculate the minimum steps required
     public static int minSteps(int n, int[][] r) {
-        int[] inDegree = new int[n + 1];
-        int[] outDegree = new int[n + 1];
+        int[] inDegree = new int[n + 1];   // Array to track incoming edges (prerequisites)
+        int[] outDegree = new int[n + 1];  // Array to track outgoing edges (courses)
+
+        // Calculate in-degree and out-degree for each course
         for (int[] prerequisite : r) {
             inDegree[prerequisite[1]]++;
             outDegree[prerequisite[0]]++;
         }
-        int ans = 0;
+
+        int ans = 0;  // Initialize the count of courses with no prerequisites
         for (int i = 1; i <= n; i++) {
+            // If a course has no incoming (in-degree) prerequisites and no outgoing (out-degree) courses,
+            // it can be considered complete without taking any steps
             if (inDegree[i] == 0 && outDegree[i] == 0) {
                 continue;
             }
+
+            // If a course has no incoming prerequisites, it can be completed in one step
             if (inDegree[i] == 0) {
                 ans++;
             }
         }
-        return ans;
+        return ans;  // Return the minimum steps required
     }
 
     public static void main(String[] args) {
-        int n = 3;
-        int[][] r = {{1, 3}, {2, 3}};
-        System.out.println(minSteps(n, r));
+        int n = 3;  // Total number of courses
+        int[][] r = {{1, 3}, {2, 3}};  // Prerequisite relationships
+        System.out.println(minSteps(n, r));  // Print the minimum steps required
     }
 }

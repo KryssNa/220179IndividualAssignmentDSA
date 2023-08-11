@@ -21,7 +21,7 @@ p.get(); // return 4
  */
 public class Question2B {
 
-    //implement your code here
+    // Definition of the Program class
     public static class Program {
         int k;
         int[] blacklist;
@@ -29,6 +29,8 @@ public class Question2B {
         int[] map;
         int size;
         int index;
+
+        // Constructor for the Program class
         public Program(int k, int[] blacklist) {
             this.k = k;
             this.blacklist = blacklist;
@@ -36,12 +38,18 @@ public class Question2B {
             this.map = new int[k];
             this.size = k - blacklist.length;
             this.index = 0;
+
+            // Initialize the map array with indices as values
             for (int i = 0; i < k; i++) {
                 map[i] = i;
             }
+
+            // Set values in the map array to -1 for elements in the blacklist
             for (int i = 0; i < blacklist.length; i++) {
                 map[blacklist[i]] = -1;
             }
+
+            // Populate the whitelist array with non-blacklisted values
             for (int i = 0; i < k; i++) {
                 if (map[i] != -1) {
                     whitelist[index++] = map[i];
@@ -49,16 +57,19 @@ public class Question2B {
             }
         }
 
+        // Method to get a random element from the whitelist
         public int get() {
-            int random = (int) (Math.random() * size);
-            return whitelist[random];
+            int random = (int) (Math.random() * size); // Generate a random index within the whitelist size
+            return whitelist[random]; // Return the random element from the whitelist
         }
     }
 
     public static void main(String[] args) {
-        int k = 7;
-        int[] blacklist = {2, 3, 5};
-        Program program = new Program(k, blacklist);
+        int k = 7; // Total number of elements
+        int[] blacklist = {2, 3, 5}; // Blacklisted elements
+        Program program = new Program(k, blacklist); // Create an instance of the Program class
+
+        // Call the get() method to retrieve and print random elements from the whitelist
         System.out.println(program.get());
         System.out.println(program.get());
         System.out.println(program.get());
@@ -66,3 +77,4 @@ public class Question2B {
         System.out.println(program.get());
     }
 }
+

@@ -32,12 +32,12 @@ public class Question1B {
                 coins[i] = Math.max(coins[i], coins[i + 1] + 1);
             }
         }
-
+        // Calculate the total number of coins required.
         int totalCoins = 0;
         for (int coin : coins) {
             totalCoins += coin;
         }
-
+        // Return the total number of coins required.
         return totalCoins;
     }
 
